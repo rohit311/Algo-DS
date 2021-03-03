@@ -96,19 +96,42 @@ class LinkedList{
     }
     else{
     	let slowPointer = this.head;
-      let fastPointer = this.head.next;
-      while(fastPointer){
-      	fastPointer = fastPointer.next;
+        let fastPointer = this.head.next;
+        while(fastPointer){
+      	  fastPointer = fastPointer.next;
         
-        if(fastPointer != null){
+          if(fastPointer != null){
         	slowPointer = slowPointer.next;
         	fastPointer = fastPointer.next;
+          }      	
         }
-      	
-      }
-      console.log('slow ',slowPointer.element);
-      console.log('fast ',fastPointer);
     }
+  }
+  
+  removeDuplicates(){
+  	if(this.head == null){
+    	throw new Error('Linked list is empty');
+    }
+    else{
+	  let slowPointer = this.head;
+      let fastPointer = this.head.next;
+      let previousValue = this.head.element;
+      
+      while(fastPointer != null){
+      	
+        
+        if(previousValue == fastPointer.element){
+		      slowPointer.next = fastPointer.next;
+        }
+        else{
+          previousValue = fastPointer.element;					
+        }
+		
+			  slowPointer = slowPointer.next;
+			  fastPointer = fastPointer.next;
+      }
+    }
+  
   }
   
   displayNodes(){
@@ -122,12 +145,13 @@ class LinkedList{
   }
 }
 
-//Testing
 let headNode = new Node(3);
 let list1 = new LinkedList(headNode);
 list1.addAtEnd(new Node(4));
 list1.addAtEnd(new Node(5));
 list1.addAtEnd(new Node(6));
+list1.addAtEnd(new Node(6));
 //list1.addAtStart(new Node(12));
-list1.frontBackSplit();
+list1.displayNodes();
+list1.removeDuplicates();
 list1.displayNodes();
