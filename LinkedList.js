@@ -120,16 +120,32 @@ class LinkedList{
       while(fastPointer != null){
       	
         
-        if(previousValue == fastPointer.element){
-		      slowPointer.next = fastPointer.next;
+        if(previousValue == currrentNode.element){
+		  slowPointer.next = fastPointer;
         }
-        else{
-          previousValue = fastPointer.element;					
-        }
+		else{
+		  previousValue = fastPointer.element;					
+		}
 		
-			  slowPointer = slowPointer.next;
-			  fastPointer = fastPointer.next;
+		slowPointer = slowPointer.next;
+		fastPointer = fastPointer.next;
       }
+    }
+  
+  }
+  
+  static moveNodes(firstList,secondList){
+  	if(!firstList || !secondList){
+    	throw new Error('List(s) is(are) empty !');
+    
+    }
+    else{
+    	let nodeToBeAdded = secondList.head;
+      let firstListHead = firstList.head;
+      secondList.head = secondList.head.next;
+      nodeToBeAdded.next = firstList.head;
+      firstList.head = nodeToBeAdded; 
+    
     }
   
   }
@@ -150,8 +166,12 @@ let list1 = new LinkedList(headNode);
 list1.addAtEnd(new Node(4));
 list1.addAtEnd(new Node(5));
 list1.addAtEnd(new Node(6));
-list1.addAtEnd(new Node(6));
 //list1.addAtStart(new Node(12));
+let headNode2 = new Node(3);
+let list2 = new LinkedList(headNode2);
+list2.addAtEnd(new Node(4));
+list2.addAtEnd(new Node(5));
+list2.addAtEnd(new Node(6));
+LinkedList.moveNodes(list1,list2);
 list1.displayNodes();
-list1.removeDuplicates();
-list1.displayNodes();
+//list2.displayNodes();
