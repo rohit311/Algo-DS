@@ -134,8 +134,29 @@ class LinkedList{
   
   }
   
+ static alternatingSplit(sourceList){
+ 		let headNode1 = new Node();
+    let headNode2 = new Node();
+  	let list1 = new LinkedList(headNode1);
+  	let list2 = new LinkedList(headNode2);
+    let currentNode = sourceList;
+    
+    while(currentNode != null){
+    	LinkedList.moveNodes(list1,currentNode);
+      
+      if(currentNode != null){
+      	LinkedList.moveNodes(list2,currentNode);
+      }
+    
+    }
+    
+    list1.displayNodes();
+    list2.displayNodes();
+    
+  }
+  
   static moveNodes(firstList,secondList){
-  	if(!firstList || !secondList){
+  	if(!secondList){
     	throw new Error('List(s) is(are) empty !');
     
     }
@@ -166,12 +187,6 @@ let list1 = new LinkedList(headNode);
 list1.addAtEnd(new Node(4));
 list1.addAtEnd(new Node(5));
 list1.addAtEnd(new Node(6));
-//list1.addAtStart(new Node(12));
-let headNode2 = new Node(3);
-let list2 = new LinkedList(headNode2);
-list2.addAtEnd(new Node(4));
-list2.addAtEnd(new Node(5));
-list2.addAtEnd(new Node(6));
-LinkedList.moveNodes(list1,list2);
-list1.displayNodes();
+list1.addAtStart(new Node(12));
+LinkedList.alternatingSplit(list1);
 //list2.displayNodes();
